@@ -184,7 +184,7 @@ public class Main extends JFrame {
             for (int j = 0; j < userNumber.length; j++) {
                 if (userNumber[i] == unknownNumber[j]) {
                     if (i == j) {
-                        break;
+                        continue;
                     }
                     cows++;
                 }
@@ -254,7 +254,7 @@ public class Main extends JFrame {
      * Message about win
      */
     private void msgWin() {
-        list.append("You guessed the number in " + count + " tries");
+        list.append("You won " + count + " tries");
         message.setText("You Win!");
     }
 }
