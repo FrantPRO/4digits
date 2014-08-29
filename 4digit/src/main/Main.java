@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.SystemColor;
 import java.text.ParseException;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -20,11 +21,15 @@ import javax.swing.text.MaskFormatter;
  */
 public class Main extends JFrame {
 
-    JLabel lbl;
-    JLabel message;
-    JFormattedTextField input;
-    JButton btn;
-    JTextArea list;
+    private final JLabel lbl;
+    private final JLabel message;
+    private final JFormattedTextField input;
+    private final JButton btn;
+    private final JTextArea list;
+    private int[] unknownNumber = {1, 2, 3, 4};
+    private int[] userNumber = {0, 0, 0, 0};
+    private int count;
+    private boolean flag = false;
 
     /**
      *
@@ -103,16 +108,153 @@ public class Main extends JFrame {
      * @throws ParseException
      */
     public static void main(String[] args) throws ParseException {
-        new Main(args);
+        Main main = new Main(args);
+        main.generator();
     }
 
+    /**
+     * Set the answer
+     */
     public void setAnswer() {
-        this.list.append(input.getText() + "\n");
+        if (flag) {
+            count = 0;
+            generator();
+            input.setText("");
+            list.setText("");
+            flag = false;
+            btn.setText("Enter");
+            return;
+        }
+        if (!setUserNumber()) {
+            msgErrorNumber();
+            return;
+        }
+        message.setText("Try again!");
+        count++;
+        for (int i = 0; i < userNumber.length; i++) {
+            this.list.append(Integer.toString(userNumber[i]));
+        }
+        this.list.append("  Cows = " + howCows()
+                + ", Bulls = " + howBulls() + "\n");
+        if (howBulls() == 4) {
+            msgWin();
+            btn.setText("New game");
+            flag = true;
+        }
     }
-    
-    private MaskFormatter formatter(String mask) throws ParseException{
+
+    /**
+     * Mask formatter for input only digits
+     *
+     * @param mask
+     * @return
+     * @throws ParseException
+     */
+    private MaskFormatter formatter(String mask) throws ParseException {
         MaskFormatter mf = new MaskFormatter(mask);
         mf.setValidCharacters("1234567890");
         return mf;
+    }
+
+    /**
+     * Random number generator of 4 digits
+     *
+     * @return random number
+     */
+    private void generator() {
+        Random rand = new Random();
+        int k = unknownNumber.length;
+        for (int i = k; i < 9; i++) {
+            int j = rand.nextInt(10);
+            if (j < k) {
+                unknownNumber[j] = i + 1;
+            }
+        }
+    }
+
+    /**
+     * How many digits encountered in the unknown number
+     *
+     * @param num - The number entered by the user
+     * @return Number of cows
+     */
+    private int howCows() {
+        int cows = 0;
+        for (int i = 0; i < userNumber.length; i++) {
+            for (int j = 0; j < userNumber.length; j++) {
+                if (userNumber[i] == unknownNumber[j]) {
+                    if (i == j) {
+                        break;
+                    }
+                    cows++;
+                }
+            }
+        }
+        return cows;
+    }
+
+    /**
+     * How many digits coinciding with up position
+     *
+     * @param num - The number entered by the user
+     * @return Number of bulls
+     */
+    private int howBulls() {
+        int bulls = 0;
+        for (int i = 0; i < userNumber.length; i++) {
+            if (userNumber[i] == unknownNumber[i]) {
+                bulls++;
+            }
+        }
+        return bulls;
+    }
+
+    /**
+     * Check the users number for repeated digids
+     *
+     * @param num - user namber
+     * @return true if the digids are not repeated in the number
+     */
+    private boolean checkUserNumber(int[] num) {
+        if (num[0] != num[1] & num[0] != num[2] & num[0] != num[3]) {
+            if (num[1] != num[2] & num[1] != num[3]) {
+                if (num[2] != num[3]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Set to the variable users number and check for correct
+     *
+     * @return true if user number is correct
+     */
+    private boolean setUserNumber() {
+        char[] num = input.getText().toCharArray();
+        for (int i = 0; i < num.length; i++) {
+            int temp = Character.digit(num[i], 10);
+            if (temp < 0) {
+                return false;
+            }
+            userNumber[i] = temp;
+        }
+        return checkUserNumber(userNumber);
+    }
+
+    /**
+     * Error message if user insert incorrect number
+     */
+    private void msgErrorNumber() {
+        message.setText("Incorrect number!");
+    }
+
+    /**
+     * Message about win
+     */
+    private void msgWin() {
+        list.append("You guessed the number in " + count + " tries");
+        message.setText("You Win!");
     }
 }
