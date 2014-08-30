@@ -33,7 +33,6 @@ public class Main extends JFrame {
 
     /**
      *
-     * @param args
      * @throws ParseException
      */
     public Main() throws ParseException {
