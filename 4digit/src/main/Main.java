@@ -36,7 +36,7 @@ public class Main extends JFrame {
      * @param args
      * @throws ParseException
      */
-    public Main(String[] args) throws ParseException {
+    public Main() throws ParseException {
         super("Game Bulls and Cows");
         setLocation(200, 200);
         setPreferredSize(new Dimension(250, 350));
@@ -108,7 +108,7 @@ public class Main extends JFrame {
      * @throws ParseException
      */
     public static void main(String[] args) throws ParseException {
-        Main main = new Main(args);
+        Main main = new Main();
         main.generator();
     }
 
@@ -215,7 +215,7 @@ public class Main extends JFrame {
      * @param num - user namber
      * @return true if the digids are not repeated in the number
      */
-    private boolean checkUserNumber(int[] num) {
+    public boolean checkUserNumber(int[] num) {
         if (num[0] != num[1] & num[0] != num[2] & num[0] != num[3]) {
             if (num[1] != num[2] & num[1] != num[3]) {
                 if (num[2] != num[3]) {
