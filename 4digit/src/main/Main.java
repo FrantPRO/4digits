@@ -228,6 +228,7 @@ public class Main extends JFrame {
     /**
      * Set to the variable users number and check for correct
      *
+     * @param num - char array from JFormattedTextField
      * @return true if user number is correct
      */
     public boolean setUserNumber(char[] num) {

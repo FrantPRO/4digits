@@ -117,10 +117,18 @@ public class MainTest {
         System.out.println("setUserNumber2");
         Assert.assertFalse(instance.setUserNumber(array));
     }
+
     @Test
     public void setUserNumber3() {
         char[] array = {'0', '0', '0', '0'};
         System.out.println("setUserNumber3");
+        Assert.assertFalse(instance.setUserNumber(array));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setUserNumber4() {
+        char[] array = null;
+        System.out.println("setUserNumber4");
         Assert.assertFalse(instance.setUserNumber(array));
     }
 }
