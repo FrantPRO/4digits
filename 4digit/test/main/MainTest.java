@@ -131,4 +131,14 @@ public class MainTest {
         System.out.println("setUserNumber4");
         Assert.assertFalse(instance.setUserNumber(array));
     }
+
+    @Test
+    public void howCows1() {
+        System.out.println("howCows1");
+        int[] user = {};
+        int[] comp = {};
+        int expected = instance.howCows(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
 }

@@ -173,7 +173,7 @@ public class Main extends JFrame {
      * @param num - The number entered by the user
      * @return Number of cows
      */
-    private int howCows(int[] userN, int[] unknownN) {
+    public int howCows(int[] userN, int[] unknownN) {
         int cows = 0;
         for (int i = 0; i < userN.length; i++) {
             for (int j = 0; j < userN.length; j++) {
@@ -194,7 +194,7 @@ public class Main extends JFrame {
      * @param num - The number entered by the user
      * @return Number of bulls
      */
-    private int howBulls(int[] userN, int[] unknownN) {
+    public int howBulls(int[] userN, int[] unknownN) {
         int bulls = 0;
         for (int i = 0; i < userN.length; i++) {
             if (userN[i] == unknownN[i]) {
