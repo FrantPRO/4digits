@@ -230,7 +230,7 @@ public class Main extends JFrame {
      *
      * @return true if user number is correct
      */
-    private boolean setUserNumber(char[] num) {
+    public boolean setUserNumber(char[] num) {
         for (int i = 0; i < num.length; i++) {
             int temp = Character.digit(num[i], 10);
             if (temp < 0) {

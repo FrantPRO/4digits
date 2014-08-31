@@ -100,13 +100,27 @@ public class MainTest {
         System.out.println("checkUserNumber8");
         Assert.assertEquals(instance.checkUserNumber(null), false);
     }
-    
+
     /**
      * Test of setUserNumber method, of class Main.
      */
     @Test
-    public void setUserNumber1(){
+    public void setUserNumber1() {
+        char[] array = {'1', '2', '3', '4'};
         System.out.println("setUserNumber1");
-        Assert.assertTrue(instance.checkUserNumber(array));
+        Assert.assertTrue(instance.setUserNumber(array));
+    }
+
+    @Test
+    public void setUserNumber2() {
+        char[] array = {'a', '2', '3', '4'};
+        System.out.println("setUserNumber2");
+        Assert.assertFalse(instance.setUserNumber(array));
+    }
+    @Test
+    public void setUserNumber3() {
+        char[] array = {'0', '0', '0', '0'};
+        System.out.println("setUserNumber3");
+        Assert.assertFalse(instance.setUserNumber(array));
     }
 }
