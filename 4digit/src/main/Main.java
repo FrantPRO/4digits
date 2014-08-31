@@ -133,9 +133,11 @@ public class Main extends JFrame {
         for (int i = 0; i < userNumber.length; i++) {
             this.list.append(Integer.toString(userNumber[i]));
         }
-        this.list.append("  Cows = " + howCows()
-                + ", Bulls = " + howBulls() + "\n");
-        if (howBulls() == 4) {
+        int cows = howCows(userNumber, unknownNumber);
+        int bulls = howBulls(userNumber, unknownNumber);
+        this.list.append("  Cows = " + cows
+                + ", Bulls = " + bulls + "\n");
+        if (bulls == 4) {
             msgWin();
             btn.setText("New game");
             flag = true;
@@ -177,11 +179,11 @@ public class Main extends JFrame {
      * @param num - The number entered by the user
      * @return Number of cows
      */
-    private int howCows() {
+    private int howCows(int[] userN, int[] unknownN) {
         int cows = 0;
-        for (int i = 0; i < userNumber.length; i++) {
-            for (int j = 0; j < userNumber.length; j++) {
-                if (userNumber[i] == unknownNumber[j]) {
+        for (int i = 0; i < userN.length; i++) {
+            for (int j = 0; j < userN.length; j++) {
+                if (userN[i] == unknownN[j]) {
                     if (i == j) {
                         continue;
                     }
@@ -198,10 +200,10 @@ public class Main extends JFrame {
      * @param num - The number entered by the user
      * @return Number of bulls
      */
-    private int howBulls() {
+    private int howBulls(int[] userN, int[] unknownN) {
         int bulls = 0;
-        for (int i = 0; i < userNumber.length; i++) {
-            if (userNumber[i] == unknownNumber[i]) {
+        for (int i = 0; i < userN.length; i++) {
+            if (userN[i] == unknownN[i]) {
                 bulls++;
             }
         }
