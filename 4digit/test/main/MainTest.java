@@ -100,4 +100,13 @@ public class MainTest {
         System.out.println("checkUserNumber8");
         Assert.assertEquals(instance.checkUserNumber(null), false);
     }
+    
+    /**
+     * Test of setUserNumber method, of class Main.
+     */
+    @Test
+    public void setUserNumber1(){
+        System.out.println("setUserNumber1");
+        Assert.assertTrue(instance.checkUserNumber(array));
+    }
 }

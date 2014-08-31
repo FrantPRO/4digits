@@ -124,7 +124,7 @@ public class Main extends JFrame {
             btn.setText("Enter");
             return;
         }
-        if (!setUserNumber()) {
+        if (!setUserNumber(input.getText().toCharArray())) {
             msgErrorNumber();
             return;
         }
@@ -230,8 +230,7 @@ public class Main extends JFrame {
      *
      * @return true if user number is correct
      */
-    private boolean setUserNumber() {
-        char[] num = input.getText().toCharArray();
+    private boolean setUserNumber(char[] num) {
         for (int i = 0; i < num.length; i++) {
             int temp = Character.digit(num[i], 10);
             if (temp < 0) {
