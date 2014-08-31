@@ -115,13 +115,7 @@ public class Main extends JFrame {
      * Set the answer
      */
     public void setAnswer() {
-        if (flag) {
-            count = 0;
-            generator();
-            input.setText("");
-            list.setText("");
-            flag = false;
-            btn.setText("Enter");
+        if (newGame()) {
             return;
         }
         if (!setUserNumber(input.getText().toCharArray())) {
@@ -255,7 +249,25 @@ public class Main extends JFrame {
      * Message about win
      */
     private void msgWin() {
-        list.append("You won " + count + " tries");
+        list.append("You won in " + count + " tries");
         message.setText("You Win!");
+    }
+
+    /**
+     * Check flag for new game start
+     * @return 
+     */
+    private boolean newGame() {
+        if (flag) {
+            count = 0;
+            generator();
+            input.setText("");
+            list.setText("");
+            flag = false;
+            btn.setText("Enter");
+            message.setText("Let`s play!");
+            return true;
+        }
+        return false;
     }
 }
