@@ -132,6 +132,9 @@ public class MainTest {
         Assert.assertFalse(instance.setUserNumber(array));
     }
 
+    /**
+     * Test of howCows method, of class Main.
+     */
     @Test
     public void howCows1() {
         System.out.println("howCows1");
@@ -139,6 +142,299 @@ public class MainTest {
         int[] comp = {};
         int expected = instance.howCows(user, comp);
         int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void howCows2() {
+        System.out.println("howCows2");
+        int[] user = null;
+        int[] comp = null;
+        int expected = instance.howCows(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows3() {
+        System.out.println("howCows3");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 7, 8};
+        int expected = instance.howCows(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows4() {
+        System.out.println("howCows4");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 2, 3, 4};
+        int expected = instance.howCows(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows5() {
+        System.out.println("howCows5");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 2, 6, 7};
+        int expected = instance.howCows(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows6() {
+        System.out.println("howCows6");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 3, 7};
+        int expected = instance.howCows(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows7() {
+        System.out.println("howCows7");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 7, 4};
+        int expected = instance.howCows(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows8() {
+        System.out.println("howCows8");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 2, 7};
+        int expected = instance.howCows(user, comp);
+        int actual = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows9() {
+        System.out.println("howCows9");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 7, 2};
+        int expected = instance.howCows(user, comp);
+        int actual = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows10() {
+        System.out.println("howCows10");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {2, 5, 6, 7};
+        int expected = instance.howCows(user, comp);
+        int actual = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows11() {
+        System.out.println("howCows11");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {2, 6, 1, 7};
+        int expected = instance.howCows(user, comp);
+        int actual = 2;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows12() {
+        System.out.println("howCows12");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {2, 5, 1, 3};
+        int expected = instance.howCows(user, comp);
+        int actual = 3;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howCows13() {
+        System.out.println("howCows13");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {2, 4, 1, 3};
+        int expected = instance.howCows(user, comp);
+        int actual = 4;
+        Assert.assertEquals(expected, actual);
+    }
+
+    /**
+     * Test of howCows method, of class Main.
+     */
+    @Test
+    public void howBulls1() {
+        System.out.println("howBulls1");
+        int[] user = {};
+        int[] comp = {};
+        int expected = instance.howBulls(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void howBulls2() {
+        System.out.println("howBulls2");
+        int[] user = null;
+        int[] comp = null;
+        int expected = instance.howBulls(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls3() {
+        System.out.println("howBulls3");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 7, 8};
+        int expected = instance.howBulls(user, comp);
+        int actual = 0;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls4() {
+        System.out.println("howBulls4");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 5, 6, 7};
+        int expected = instance.howBulls(user, comp);
+        int actual = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls5() {
+        System.out.println("howBulls5");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 2, 6, 7};
+        int expected = instance.howBulls(user, comp);
+        int actual = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls6() {
+        System.out.println("howBulls6");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 3, 7};
+        int expected = instance.howBulls(user, comp);
+        int actual = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls7() {
+        System.out.println("howBulls7");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 7, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls8() {
+        System.out.println("howBulls8");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 2, 5, 6};
+        int expected = instance.howBulls(user, comp);
+        int actual = 2;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls9() {
+        System.out.println("howBulls9");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 5, 3, 6};
+        int expected = instance.howBulls(user, comp);
+        int actual = 2;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls10() {
+        System.out.println("howBulls10");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 5, 6, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 2;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls11() {
+        System.out.println("howBulls11");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 2, 6, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 2;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls12() {
+        System.out.println("howBulls12");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 6, 3, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 2;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls13() {
+        System.out.println("howBulls13");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 2, 3, 6};
+        int expected = instance.howBulls(user, comp);
+        int actual = 3;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls14() {
+        System.out.println("howBulls14");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 2, 5, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 3;
+        Assert.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void howBulls15() {
+        System.out.println("howBulls15");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 5, 3, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 3;
+        Assert.assertEquals(expected, actual);
+    }
+    
+      @Test
+    public void howBulls16() {
+        System.out.println("howBulls16");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {5, 2, 3, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 3;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void howBulls17() {
+        System.out.println("howBulls17");
+        int[] user = {1, 2, 3, 4};
+        int[] comp = {1, 2, 3, 4};
+        int expected = instance.howBulls(user, comp);
+        int actual = 4;
         Assert.assertEquals(expected, actual);
     }
 }
