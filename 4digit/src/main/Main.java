@@ -170,7 +170,8 @@ public class Main extends JFrame {
     /**
      * How many digits encountered in the unknown number
      *
-     * @param num - The number entered by the user
+     * @param userN - input user number
+     * @param unknownN - generate number
      * @return Number of cows
      */
     public int howCows(int[] userN, int[] unknownN) {
@@ -191,7 +192,8 @@ public class Main extends JFrame {
     /**
      * How many digits coinciding with up position
      *
-     * @param num - The number entered by the user
+     * @param userN - input user number
+     * @param unknownN - generate number
      * @return Number of bulls
      */
     public int howBulls(int[] userN, int[] unknownN) {
