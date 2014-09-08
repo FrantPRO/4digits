@@ -265,16 +265,19 @@ public class Main extends JFrame {
      * @return random number
      */
     private void generator() {
-        Random rand = new Random();
-        int k = getUnknownNumber().length;
-        int[] tmp = new int[k];
-        for (int i = k; i < 9; i++) {
-            int j = rand.nextInt(10);
-            if (j < k) {
-                tmp[j] = i + 1;
+        int n = unknownNumber.length;
+        Random random = new Random();
+        int targetIdx = 0;
+        int source = 0;
+        while (targetIdx < n) {
+
+            int r = random.nextInt(10 - source);
+
+            if (r < n - targetIdx) {
+                unknownNumber[targetIdx++] = source;
             }
+            source++;
         }
-        setUnknownNumber(tmp);
     }
 
     /**
@@ -357,7 +360,8 @@ public class Main extends JFrame {
 
     /**
      * Button text change
-     * @param text 
+     *
+     * @param text
      */
     private void buttonSetText(String text) {
         this.btn.setText(text);
