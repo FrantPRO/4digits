@@ -6,8 +6,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- *
- * @author Frantsuzov S.
+ * @author <strong >S.N. Frantsuzov, 2014</strong>
+ * @version 1.0
  */
 class Listener extends WindowAdapter implements ActionListener {
     

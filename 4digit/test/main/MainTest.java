@@ -14,8 +14,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
- * @author Lucky
+ * @author <strong >S.N. Frantsuzov, 2014</strong>
+ * @version 1.0
  */
 public class MainTest {
 

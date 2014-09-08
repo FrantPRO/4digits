@@ -16,8 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.text.MaskFormatter;
 
 /**
- *
- * @author Frantsuzov S.
+ * @author <strong >S.N. Frantsuzov, 2014</strong>
+ * @version 1.0
  */
 public class Main extends JFrame {
 
@@ -32,8 +32,9 @@ public class Main extends JFrame {
     private boolean flag = false;
 
     /**
+     * Default constructor
      *
-     * @throws ParseException
+     * @throws ParseException - {@link java.text.ParseException}
      */
     public Main() throws ParseException {
         super("Game Bulls and Cows");
@@ -103,8 +104,8 @@ public class Main extends JFrame {
 
     /**
      *
-     * @param args
-     * @throws ParseException
+     * @param args arguments of command string
+     * @throws ParseException - {@link java.text.ParseException}
      */
     public static void main(String[] args) throws ParseException {
         Main main = new Main();
@@ -114,28 +115,135 @@ public class Main extends JFrame {
     /**
      * Set the answer
      */
-    public void setAnswer() {
+    void setAnswer() {
         if (newGame()) {
             return;
         }
-        if (!setUserNumber(input.getText().toCharArray())) {
+        if (!setUserNumber(getInput().getText().toCharArray())) {
             msgErrorNumber();
             return;
         }
-        message.setText("Try again!");
-        count++;
-        for (int i = 0; i < userNumber.length; i++) {
-            this.list.append(Integer.toString(userNumber[i]));
+        showMessage("Try again!");
+        incCount();
+        int[] un = getUserNumber();
+        for (int i = 0; i < un.length; i++) {
+            this.list.append(Integer.toString(un[i]));
         }
-        int cows = howCows(userNumber, unknownNumber);
-        int bulls = howBulls(userNumber, unknownNumber);
+        int cows = howCows(un, getUnknownNumber());
+        int bulls = howBulls(un, getUnknownNumber());
         this.list.append("  Cows = " + cows
                 + ", Bulls = " + bulls + "\n");
         if (bulls == 4) {
             msgWin();
-            btn.setText("New game");
+            buttonSetText("New game");
             flag = true;
         }
+    }
+
+    /**
+     * How many digits encountered in the unknown number
+     *
+     * @param userN - input user number
+     * @param unknownN - generate number
+     * @return Number of cows
+     */
+    int howCows(int[] userN, int[] unknownN) {
+        int cows = 0;
+        for (int i = 0; i < userN.length; i++) {
+            for (int j = 0; j < userN.length; j++) {
+                if (userN[i] == unknownN[j]) {
+                    if (i == j) {
+                        continue;
+                    }
+                    cows++;
+                }
+            }
+        }
+        return cows;
+    }
+
+    /**
+     * How many digits coinciding with up position
+     *
+     * @param userN - input user number
+     * @param unknownN - generate number
+     * @return Number of bulls
+     */
+    int howBulls(int[] userN, int[] unknownN) {
+        int bulls = 0;
+        for (int i = 0; i < userN.length; i++) {
+            if (userN[i] == unknownN[i]) {
+                bulls++;
+            }
+        }
+        return bulls;
+    }
+
+    /**
+     * Check the users number for repeated digids
+     *
+     * @param num - user namber
+     * @return true if the digids are not repeated in the number
+     */
+    boolean checkUserNumber(int[] num) {
+        if (num[0] != num[1] & num[0] != num[2] & num[0] != num[3]) {
+            if (num[1] != num[2] & num[1] != num[3]) {
+                if (num[2] != num[3]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Set to the variable users number and check for correct
+     *
+     * @param num - char array from JFormattedTextField
+     * @return true if user number is correct
+     */
+    boolean setUserNumber(char[] num) {
+        for (int i = 0; i < num.length; i++) {
+            int temp = Character.digit(num[i], 10);
+            if (temp < 0) {
+                return false;
+            }
+            userNumber[i] = temp;
+        }
+        return checkUserNumber(getUserNumber());
+    }
+
+    /**
+     * Error message if user insert incorrect number
+     */
+    private void msgErrorNumber() {
+        showMessage("Incorrect number!");
+    }
+
+    /**
+     * Message about win
+     */
+    private void msgWin() {
+        list.append("You won in " + getCount() + " tries");
+        showMessage("You Win!");
+    }
+
+    /**
+     * Check flag for new game start
+     *
+     * @return
+     */
+    private boolean newGame() {
+        if (flag) {
+            setCount(0);
+            generator();
+            clearAllTextFields();
+            flag = false;
+            buttonSetText("Enter");
+            showMessage("Let`s play!");
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -158,118 +266,100 @@ public class Main extends JFrame {
      */
     private void generator() {
         Random rand = new Random();
-        int k = unknownNumber.length;
+        int k = getUnknownNumber().length;
+        int[] tmp = new int[k];
         for (int i = k; i < 9; i++) {
             int j = rand.nextInt(10);
             if (j < k) {
-                unknownNumber[j] = i + 1;
+                tmp[j] = i + 1;
             }
         }
+        setUnknownNumber(tmp);
     }
 
     /**
-     * How many digits encountered in the unknown number
+     * Getter of the variable input
      *
-     * @param userN - input user number
-     * @param unknownN - generate number
-     * @return Number of cows
+     * @return value of the variable input
      */
-    public int howCows(int[] userN, int[] unknownN) {
-        int cows = 0;
-        for (int i = 0; i < userN.length; i++) {
-            for (int j = 0; j < userN.length; j++) {
-                if (userN[i] == unknownN[j]) {
-                    if (i == j) {
-                        continue;
-                    }
-                    cows++;
-                }
-            }
-        }
-        return cows;
+    private JFormattedTextField getInput() {
+        return input;
     }
 
     /**
-     * How many digits coinciding with up position
+     * Getter of the variable unknownNumber
      *
-     * @param userN - input user number
-     * @param unknownN - generate number
-     * @return Number of bulls
+     * @return value of the variable unknownNumber
      */
-    public int howBulls(int[] userN, int[] unknownN) {
-        int bulls = 0;
-        for (int i = 0; i < userN.length; i++) {
-            if (userN[i] == unknownN[i]) {
-                bulls++;
-            }
-        }
-        return bulls;
+    private int[] getUnknownNumber() {
+        return unknownNumber;
     }
 
     /**
-     * Check the users number for repeated digids
+     * Getter of the variable userNumber
      *
-     * @param num - user namber
-     * @return true if the digids are not repeated in the number
+     * @return value of the variable userNumber
      */
-    public boolean checkUserNumber(int[] num) {
-        if (num[0] != num[1] & num[0] != num[2] & num[0] != num[3]) {
-            if (num[1] != num[2] & num[1] != num[3]) {
-                if (num[2] != num[3]) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    private int[] getUserNumber() {
+        return userNumber;
     }
 
     /**
-     * Set to the variable users number and check for correct
+     * Getter of the variable count
      *
-     * @param num - char array from JFormattedTextField
-     * @return true if user number is correct
+     * @return value of the variable count
      */
-    public boolean setUserNumber(char[] num) {
-        for (int i = 0; i < num.length; i++) {
-            int temp = Character.digit(num[i], 10);
-            if (temp < 0) {
-                return false;
-            }
-            userNumber[i] = temp;
-        }
-        return checkUserNumber(userNumber);
+    private int getCount() {
+        return count;
     }
 
     /**
-     * Error message if user insert incorrect number
+     * Setter of the variable count
+     *
+     * @param num
      */
-    private void msgErrorNumber() {
-        message.setText("Incorrect number!");
+    private void setCount(int num) {
+        this.count = num;
     }
 
     /**
-     * Message about win
+     * Increment the count
      */
-    private void msgWin() {
-        list.append("You won in " + count + " tries");
-        message.setText("You Win!");
+    private void incCount() {
+        this.count++;
     }
 
     /**
-     * Check flag for new game start
-     * @return 
+     * Clear all text fields for new game
      */
-    private boolean newGame() {
-        if (flag) {
-            count = 0;
-            generator();
-            input.setText("");
-            list.setText("");
-            flag = false;
-            btn.setText("Enter");
-            message.setText("Let`s play!");
-            return true;
-        }
-        return false;
+    private void clearAllTextFields() {
+        input.setText("");
+        list.setText("");
+    }
+
+    /**
+     * Setter of the variable unknownNumber
+     *
+     * @param unknownNumber
+     */
+    private void setUnknownNumber(int[] unknownNumber) {
+        this.unknownNumber = unknownNumber;
+    }
+
+    /**
+     * Message show to user
+     *
+     * @param text
+     */
+    private void showMessage(String text) {
+        this.message.setText(text);
+    }
+
+    /**
+     * Button text change
+     * @param text 
+     */
+    private void buttonSetText(String text) {
+        this.btn.setText(text);
     }
 }
