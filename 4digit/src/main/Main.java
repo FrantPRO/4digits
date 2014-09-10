@@ -1,3 +1,7 @@
+/*
+ * Class Main
+ */
+
 package main;
 
 import java.awt.Dimension;
@@ -6,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.SystemColor;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -30,6 +35,8 @@ public class Main extends JFrame {
     private int[] userNumber = {0, 0, 0, 0};
     private int count;
     private boolean flag = false;
+    private long timeStart;
+    private long timeStop;
 
     /**
      * Default constructor
@@ -116,6 +123,7 @@ public class Main extends JFrame {
      * Set the answer
      */
     void setAnswer() {
+        input.grabFocus();
         if (newGame()) {
             return;
         }
@@ -134,6 +142,7 @@ public class Main extends JFrame {
         this.list.append("  Cows = " + cows
                 + ", Bulls = " + bulls + "\n");
         if (bulls == 4) {
+            timeStop = System.currentTimeMillis();
             msgWin();
             buttonSetText("New game");
             flag = true;
@@ -224,7 +233,8 @@ public class Main extends JFrame {
      * Message about win
      */
     private void msgWin() {
-        list.append("You won in " + getCount() + " tries");
+        list.append("You won in " + getCount() + " tries\n");
+        list.append("Your time is " + getTimeGame());
         showMessage("You Win!");
     }
 
@@ -270,14 +280,13 @@ public class Main extends JFrame {
         int targetIdx = 0;
         int source = 0;
         while (targetIdx < n) {
-
             int r = random.nextInt(10 - source);
-
             if (r < n - targetIdx) {
                 unknownNumber[targetIdx++] = source;
             }
             source++;
         }
+        timeStart = System.currentTimeMillis();
     }
 
     /**
@@ -341,15 +350,6 @@ public class Main extends JFrame {
     }
 
     /**
-     * Setter of the variable unknownNumber
-     *
-     * @param unknownNumber
-     */
-    private void setUnknownNumber(int[] unknownNumber) {
-        this.unknownNumber = unknownNumber;
-    }
-
-    /**
      * Message show to user
      *
      * @param text
@@ -365,5 +365,10 @@ public class Main extends JFrame {
      */
     private void buttonSetText(String text) {
         this.btn.setText(text);
+    }
+
+    private String getTimeGame() {
+        long time = timeStop - timeStart;
+        return (new SimpleDateFormat("m").format(time)) + ":" + new SimpleDateFormat("s").format(time);
     }
 }
